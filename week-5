@@ -1,0 +1,81 @@
+# Base class representing a generic Smartphone
+class Smartphone:
+    def __init__(self, brand, model, storage, ram, camera):
+        self.brand = brand
+        self.model = model
+        self.storage = storage
+        self.ram = ram
+        self.camera = camera
+
+    # Method to display the phone's specifications
+    def display_specs(self):
+        return (f"Brand: {self.brand}\n"
+                f"Model: {self.model}\n"
+                f"Storage: {self.storage} GB\n"
+                f"RAM: {self.ram} GB\n"
+                f"Camera: {self.camera} MP")
+
+    # Method to make a call
+    def make_call(self, number):
+        print(f"Calling {number}...")
+
+    # Method to send a message
+    def send_message(self, number, message):
+        print(f"Sending message to {number}: {message}")
+
+
+# Derived class for a specific type of smartphone: iPhone
+class iPhone(Smartphone):
+    def __init__(self, model, storage, ram, camera, os_version):
+        # Calling the parent class constructor
+        super().__init__('Apple', model, storage, ram, camera)
+        self.os_version = os_version
+
+    # Overriding the display_specs method to add iPhone-specific details
+    def display_specs(self):
+        specs = super().display_specs()  # Get the base specs
+        return f"{specs}\nOS Version: iOS {self.os_version}"
+
+    # Method specific to iPhone - Face ID authentication
+    def face_id_unlock(self):
+        print(f"Unlocking {self.model} using Face ID.")
+
+
+# Derived class for a specific type of smartphone: Samsung Galaxy
+class SamsungGalaxy(Smartphone):
+    def __init__(self, model, storage, ram, camera, screen_size):
+        # Calling the parent class constructor
+        super().__init__('Samsung', model, storage, ram, camera)
+        self.screen_size = screen_size
+
+    # Overriding the display_specs method to add Samsung-specific details
+    def display_specs(self):
+        specs = super().display_specs()  # Get the base specs
+        return f"{specs}\nScreen Size: {self.screen_size} inches"
+
+    # Method specific to Samsung - Samsung Bixby assistant
+    def bixby_assistant(self):
+        print(f"Activating Bixby assistant on {self.model}.")
+
+
+# Creating objects for both iPhone and Samsung Galaxy classes
+iphone_14 = iPhone('iPhone 14', 128, 6, 12, '16.0')
+samsung_s23 = SamsungGalaxy('Galaxy S23', 256, 8, 50, 6.1)
+
+# Displaying specifications for both phones
+print("iPhone 14 Specs:")
+print(iphone_14.display_specs())
+print("\n")
+
+print("Samsung Galaxy S23 Specs:")
+print(samsung_s23.display_specs())
+
+# Using methods
+iphone_14.make_call('123-456-7890')
+iphone_14.send_message('123-456-7890', 'Hello, how are you?')
+iphone_14.face_id_unlock()
+
+print("\n")
+samsung_s23.make_call('987-654-3210')
+samsung_s23.send_message('987-654-3210', 'Good morning!')
+samsung_s23.bixby_assistant()
